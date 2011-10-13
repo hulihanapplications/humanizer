@@ -1,6 +1,6 @@
 # Humanizer
 
-Humanizer is a very simple CAPTCHA method. It has a localized YAML file with questions and answers which is used to validate that the user is an actual human. Any model that includes ActiveModel::Validations should work. Our aim is to be database and mapper agnostic, so if it doesn't work for you, open an issue. Humanizer only works with Rails 3.
+Humanizer is a very simple CAPTCHA method. It has a localized YAML file with questions and answers which is used to validate that the user is an actual human. Any model that includes ActiveModel::Validations should work. Our aim is to be database and mapper agnostic, so if it doesn't work for you, open an issue. 
 
 ## Installation
 
@@ -54,6 +54,15 @@ In case you want to give your users the option to change the question, there's a
 To make sure the current question doesn't get asked again, you can pass the current question id to the method. For example:
 
     @user.change_humanizer_question(params[:user][:humanizer_question_id])
+
+## Using with Rails 2.3.x
+
+This branch of Humanizer *does* work with Rails 2.3.x, but the generators only work with Rails 3.x for now. 
+So if you want to use the default humanizer translation file in your app, you'll have to copy it the old fashioned way:
+
+```bash
+cp [path to humanizer gem]/lib/generators/templates/locales/en.yml [path to app]/config/locales/en.humanizer.yml
+``` 
           
 ## Live sites
 
