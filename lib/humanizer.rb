@@ -31,7 +31,7 @@ module Humanizer
     @humanizer_questions ||= I18n.translate("humanizer.questions")
   end
 
-  def humanizer_question_ids
+  def humanizer_question_ids    
     @humanizer_question_ids ||= (0...humanizer_questions.count).to_a
   end
 
@@ -45,7 +45,11 @@ module Humanizer
   end
 
   def humanizer_check_answer
-    errors[:humanizer_answer] << I18n.translate("humanizer.validation.error") unless humanizer_correct_answer?
+    if Rails::VERSION::STRING > "3.0.0"
+      errors[:humanizer_answer] << I18n.translate("humanizer.validation.error") unless humanizer_correct_answer?
+    else
+      errors.add(:humanizer_answer, I18n.translate("humanizer.validation.error")) unless humanizer_correct_answer?
+    end
   end
   
   module ClassMethods
